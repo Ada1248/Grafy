@@ -1,12 +1,14 @@
 # import networkx as nx
-# import matplotlib.pyplot as plt
+import matplotlib
+# matplotlib.use('TkAgg')
+from matplotlib import pyplot as plt
 import random
 import sys
-random.seed()
 
-adj_matrix = [] 
-i_matrix = []
-adj_list = []
+import networkx as nx
+import networkx.drawing.tests.test_pylab
+
+random.seed()
 
 # generator G(n, p)
 # generator zależny od prawdopodobienstwa
@@ -44,9 +46,9 @@ def gen_G_p(n, p):
 
     return g_list
 
-    # zapisywanie do pliku 
-    # musi istnieć plik random_graph.txt
-    # musi istnieć plik do korego ma zapisywać
+    ##### zapisywanie do pliku
+    ##### musi istnieć plik random_graph.txt
+    ##### musi istnieć plik do korego ma zapisywać
     # with open("random_graph.txt", 'w') as file:
     #     file.writelines(' '.join(str(j) for j in i) + '\n' for i in g_list)
     # file.close()
@@ -74,7 +76,7 @@ def gen_G_l(n, l):
         for j in range(n):
             if sum_1 < l and j > i:
                 adj_matrix[i][j] = 1
-                adj_matrix[j][i] = 1 
+                adj_matrix[j][i] = 1
                 sum_1 += 1
     return adj_matrix
 
@@ -106,7 +108,7 @@ def draw_circular(adj_list):
 
     nx.draw_circular(graph, **options)
     # nx.draw(graph, **options)
-    plt.show()
+    networkx.drawing.tests.test_pylab.plt.savefig('zad2.png')
 
 #wypisywanie listy sąsiedztwa
 def print_list(adj_list):
@@ -118,7 +120,7 @@ def print_list(adj_list):
         else:
             for j in range(len(adj_list[i]) - 1):
                 print(adj_list[i][j], end = ', ')
-            print(adj_list[i][len(adj_list[i]) - 1]) 
+            print(adj_list[i][len(adj_list[i]) - 1])
     print()
 
 #wypisywanie macierzy
@@ -148,17 +150,10 @@ def transpose(matrix):
     return t_matrix
 
 #zmiana listy sąsiedztwa na macierz sąsiedztwa
-def adj_list_to_adj_matrix(adj_list):
-    adj_matrix = []
-    for i in range(len(adj_list)):
-        row = []
-        for j in range(len(adj_list)):
-            if j + 1 in adj_list[i]:
-                row.append(1)
-            else:
-                row.append(0)
-        adj_matrix.append(row)
-    return adj_matrix
+def adj_list_to_adj_matrix(li):
+    size = range(len(li))
+    return [[1 if i in el else 0 for i in size] for el in li]
+
 
 #zamiana listy na macierz incydencji
 def adj_list_to_i_matrix(adj_list):
@@ -168,19 +163,9 @@ def adj_list_to_i_matrix(adj_list):
     i_matrix = adj_matrix_to_i_matrix(adj_matrix)
     return i_matrix
 
-
-
 #zmiana macierzy sąsiedztwa na listę sąsiedztwa
 def adj_matrix_to_list(adj_matrix):
-    adj_list = []
-    for i in range(len(adj_matrix)):
-        row = []
-        for j in range(len(adj_matrix[0])):
-            if adj_matrix[i][j] == 1:
-                row.append(j + 1)
-
-        adj_list.append(row)
-    return adj_list
+    return [[idx for idx, val in enumerate(el) if val] for el in adj_matrix]
 
 #zmiana macierzy sąsiedztwa na macierz incydencji
 def adj_matrix_to_i_matrix(adj_matrix):
@@ -219,116 +204,13 @@ def i_matrix_to_adj_matrix(i_matrix):
                 indexes.append(j)
         if not len(indexes) == 0:
             for j in range(len(adj_matrix[0])):
-                adj_matrix[indexes[0]][indexes[1]] = 1 
-                adj_matrix[indexes[1]][indexes[0]] = 1 
-    return adj_matrix         
+                adj_matrix[indexes[0]][indexes[1]] = 1
+                adj_matrix[indexes[1]][indexes[0]] = 1
+    return adj_matrix
 
-#zamiana macierzy incydencji na listę sąsiedztwa
 def i_matrix_to_list(i_matrix):
     adj_list = []
     adj_matrix = []
     adj_matrix = i_matrix_to_adj_matrix(i_matrix)
     adj_list = adj_matrix_to_list(adj_matrix)
     return adj_list
-
-
-#zrobic weryfikzaje wprowadzanych danych
-with open('FileIn.txt') as file:
-    mode = str(file.readline().split()[0])
-    for line in file:
-        if mode == 'N':
-            row = []
-            for element in line.strip().split():
-                row.append(int(element))
-            adj_matrix.append(row)
-
-        elif mode == 'I':
-            row = []
-            for element in line.strip().split():
-                row.append(int(element))
-            i_matrix.append(row)
-
-
-        elif mode == 'L':
-            row = []
-            it = 0    
-            for element in line.strip().split(' '):
-                if it == 0:
-                    it += 1
-                else:
-                    row.append(int(element))
-            adj_list.append(row)
-
-if mode == 'N':
-    i_matrix = adj_matrix_to_i_matrix(adj_matrix)
-    adj_list = adj_matrix_to_list(adj_matrix)
-
-elif mode == 'I':
-    adj_matrix = i_matrix_to_adj_matrix(i_matrix)
-    adj_list = i_matrix_to_list(i_matrix)
-
-elif mode == 'L':
-    adj_matrix = adj_list_to_adj_matrix(adj_list)
-    i_matrix = adj_list_to_i_matrix(adj_list)
-
-
-###testowanie zad 1
-print_list(adj_list)
-print_adj_matrix(adj_matrix)
-print_i_matrix(i_matrix)
-
-
-### testowanie zad 2
-# create_file_to_draw(adj_list)
-# draw_circular(adj_list)
-
-
-## testowanie zad 3 - prawdopodobieństwo
-# adj_list = gen_G_p(6, 0.7)
-# adj_matrix = adj_list_to_adj_matrix(adj_list)
-# i_matrix = adj_list_to_i_matrix(adj_list)
-# print_list(adj_list)
-# print_adj_matrix(adj_matrix)
-# print_i_matrix(i_matrix)
-
-
-###testowanie zad 3 - krawedzie
-# adj_matrix = gen_G_l(8, 8)
-# i_matrix = adj_matrix_to_i_matrix(adj_matrix)
-# adj_list = adj_matrix_to_list(adj_matrix)
-# print_list(adj_list)
-# print_adj_matrix(adj_matrix)
-# print_i_matrix(i_matrix)
-
-
-
-
-
-
-# W FileIn w pierwszej lini musimy podać co podajemy:
-# N - macierz sąsiedztwa
-# I - macierz incydencji
-# L - listę sąsiedztwa
-# macierze itd mają być bezpośrednio pod literką
-# nie może być nigdzie pustych linii
-# przykładowe pliki:
-# L
-# 1: 2 5
-# 2: 1 3 4 5
-# 3: 2 4
-# 4: 2 3 5
-# 5: 1 2 4
-
-# N
-# 0 1 0 0 1
-# 1 0 1 1 1
-# 0 1 0 1 0
-# 0 1 1 0 1
-# 1 1 0 1 0
-
-# I
-# 1 0 0 0 1 0 0
-# 1 1 1 0 0 1 0
-# 0 1 0 1 0 0 0
-# 0 0 1 1 0 0 1
-# 0 0 0 0 1 1 1
