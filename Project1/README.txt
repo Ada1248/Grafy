@@ -1,5 +1,8 @@
-zestaw1.py - program
+zestaw1.py - funkcje portzebne do zadań
 
+zad1.py
+zad2.py
+zad3-*.py  poszczególne zadania
 
 
 FileIn - plik z danymi wejściowymi
