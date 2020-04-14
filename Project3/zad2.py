@@ -20,7 +20,7 @@ def relax(u, v, w):
         d[v] = d[u] + w[u][v]
         p[v] = u
 
-def dijkstra(g, w, s):
+def dijkstra(g, s):
     initial(g, s)
     done.clear()
     not_done = [i for i in range(len(g.adj_matrix))]
@@ -36,7 +36,7 @@ def dijkstra(g, w, s):
 
         for v in not_done:
             if g.adj_matrix[v][u] != 0:
-                relax(u, v, w)
+                relax(u, v, g.adj_matrix)
 
     print_dijkstra(d, p, s)
 
@@ -69,5 +69,4 @@ if __name__ == "__main__":
             [0, 0, 0, 0, 0, 0, 0, 9, 0, 5, 3, 0]]
 
     g = wg.WeightedGraph(A)
-    # print(g)
-    dijkstra(g, g.adj_matrix, 0)
+    dijkstra(g, 0)
