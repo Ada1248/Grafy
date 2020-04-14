@@ -6,7 +6,7 @@ FileIn - plik z danymi wejściowymi
 Musi mieć strukture:
 
 W pierwszej lini musimy podać co podajemy:
-N - macierz sąsiedztwa
+A - macierz sąsiedztwa
 I - macierz incydencji
 L - listę sąsiedztwa
 macierz lub lista ma być bezpośrednio pod literką
@@ -20,7 +20,7 @@ L
 4: 2 3 5
 5: 1 2 4
 
-N
+A 
 0 1 0 0 1
 1 0 1 1 1
 0 1 0 1 0

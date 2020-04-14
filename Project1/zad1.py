@@ -8,7 +8,7 @@ if __name__ == "__main__":
     with open('FileIn.txt') as file:
         mode = str(file.readline().split()[0])
         for line in file:
-            if mode == 'N':
+            if mode == 'A':
                 row = []
                 for element in line.strip().split():
                     row.append(int(element))
@@ -31,7 +31,7 @@ if __name__ == "__main__":
                         row.append(int(element))
                 adj_list.append(row)
 
-    if mode == 'N':
+    if mode == 'A':
         i_matrix = zestaw1.adj_matrix_to_i_matrix(adj_matrix)
         adj_list = zestaw1.adj_matrix_to_list(adj_matrix)
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
 
 # W FileIn w pierwszej lini musimy podać co podajemy:
-# N - macierz sąsiedztwa
+# A - macierz sąsiedztwa
 # I - macierz incydencji
 # L - listę sąsiedztwa
 # macierze itd mają być bezpośrednio pod literką
