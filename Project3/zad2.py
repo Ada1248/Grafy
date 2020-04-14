@@ -1,4 +1,4 @@
-import dijkstra
+import functions
 import weighted_graph as wg
 
 if __name__ == "__main__":
@@ -15,9 +15,17 @@ if __name__ == "__main__":
             [0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 5],
             [0, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 3],
             [0, 0, 0, 0, 0, 0, 0, 9, 0, 5, 3, 0]]
+    # A =  [
+    #         [0, 8, 0, 9, 3, 9, 5],
+    #         [8, 0, 0, 2, 4, 0, 1],
+    #         [0, 0, 0, 0, 0, 4, 0],
+    #         [9, 2, 0, 0, 0, 9, 0],
+    #         [3, 4, 0, 0, 0, 4, 0],
+    #         [9, 0, 4, 9, 4, 0, 0],
+    #         [5, 1, 0, 0, 0, 0, 0]]
 
     s = 0
     g = wg.WeightedGraph(A)
-    d, p = dijkstra.dijkstra(g, s)
+    d, p = functions.dijkstra(g, s)
 
-    print(dijkstra.print_dijkstra(d, p, s))
+    print(functions.print_dijkstra(d, p, s))

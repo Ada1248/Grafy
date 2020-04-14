@@ -25,6 +25,9 @@ if __name__ == "__main__":
     #         [5, 1, 0, 0, 0, 0, 0]]
 
     g = wg.WeightedGraph(A)
-    matrix_of_distance = functions.make_matrix_of_distance(g)
 
-    print(wg.print_matrix(matrix_of_distance))
+    centre = functions.find_centre(g)
+    print(centre)
+
+    centre_minimax = functions.find_centre_minimax(g)
+    print(centre_minimax)
