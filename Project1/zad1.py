@@ -28,7 +28,7 @@ if __name__ == "__main__":
                     if it == 0:
                         it += 1
                     else:
-                        row.append(int(element))
+                        row.append(int(element) - 1)
                 adj_list.append(row)
 
     if mode == 'A':
