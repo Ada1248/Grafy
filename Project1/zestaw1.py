@@ -32,19 +32,20 @@ def gen_G_p(n, p):
         row = []
         for j in range(i, n):
             if random.random() < p and i != j:
-                row.append(j + 1)
+                row.append(j)
         g_list.append(row)
 
     # uzupelnienie o poprzednio wylosowane wartosci
     for i in range(1, n):
         for j in range(0, i):
-            if i + 1 in g_list[j]:
-                g_list[i].append(j + 1)
+            if i in g_list[j]:
+                g_list[i].append(j)
 
     for i in range(n):
         g_list[i].sort()
 
     return g_list
+
 
     ##### zapisywanie do pliku
     ##### musi istnieć plik random_graph.txt
@@ -119,8 +120,8 @@ def print_list(adj_list):
             print()
         else:
             for j in range(len(adj_list[i]) - 1):
-                print(adj_list[i][j], end = ', ')
-            print(adj_list[i][len(adj_list[i]) - 1])
+                print(adj_list[i][j]+1, end = ', ')
+            print(adj_list[i][len(adj_list[i]) - 1]+1)
     print()
 
 #wypisywanie macierzy
