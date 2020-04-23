@@ -5,20 +5,14 @@ from matplotlib import pyplot as plt
 import random
 import sys
 
-import networkx as nx
-import networkx.drawing.tests.test_pylab
+# import networkx as nx
+# import networkx.drawing.tests.test_pylab
 
 random.seed()
 
 # generator G(n, p)
 # generator zależny od prawdopodobienstwa
-# zwraca graf w postaci listy sąsiedztwa (bez wypisywaniea 1: )
-# np:
-# 3 4
-# 3 4 5
-# 1 2 5
-# 1 2 5
-# 2 3 4
+# zwraca graf w postaci listy sąsiedztwa
 def gen_G_p(n, p):
     # losuje niepowtarzalne wartosci (zeby nie losowac dwa razy czy moze byc np polaczenie 1-2 i 2-1)
     if type(n) is not int:
@@ -54,15 +48,9 @@ def gen_G_p(n, p):
     # file.close()
 
 #generator G(n, l) zwraca macierz sąsiedztwa
-# np.
-# 0 1 0 0 1
-# 1 0 1 1 1
-# 0 1 0 1 0
-# 0 1 1 0 1
-# 1 1 0 1 0
 def gen_G_l(n, l):
     if type(n) is not int:
-        print("Podana liczba wierzcgołków nie jest liczbą całkowitą")
+        print("Podana liczba wierzchgołków nie jest liczbą całkowitą")
         sys.exit()
     if type(l) is not int:
         print("Podana liczba krawędzi nie jest liczbą całkowitą")
@@ -72,14 +60,14 @@ def gen_G_l(n, l):
         sys.exit()
     adj_matrix = [[0 for _ in range(n)] for _ in range(n)]
     sum_1 = 0
-    for i in range(n):
-        for j in range(n):
-            if sum_1 < l and j > i:
-                adj_matrix[i][j] = 1
-                adj_matrix[j][i] = 1
-                sum_1 += 1
-    return adj_matrix
-
+    while sum_1 != l:
+        i = random.randrange(0, n)
+        j = random.randrange(i, n)
+        if adj_matrix[i][j] == 0 and i != j:
+            adj_matrix[i][j] = 1
+            adj_matrix[j][i] = 1  
+            sum_1 += 1  
+    return adj_matrix          
 
 #funkcja tworząca plik txt na podstawie którego rysowany jest wykres
 def create_file_to_draw(adj_list):
@@ -119,8 +107,8 @@ def print_list(adj_list):
             print()
         else:
             for j in range(len(adj_list[i]) - 1):
-                print(adj_list[i][j], end = ', ')
-            print(adj_list[i][len(adj_list[i]) - 1])
+                print(adj_list[i][j] + 1, end = ', ')
+            print(adj_list[i][len(adj_list[i]) - 1] + 1)
     print()
 
 #wypisywanie macierzy
