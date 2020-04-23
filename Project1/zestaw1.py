@@ -5,8 +5,8 @@ from matplotlib import pyplot as plt
 import random
 import sys
 
-# import networkx as nx
-# import networkx.drawing.tests.test_pylab
+import networkx as nx
+import networkx.drawing.tests.test_pylab
 
 random.seed()
 
