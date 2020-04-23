@@ -16,7 +16,7 @@ random.seed()
 def gen_G_p(n, p):
     # losuje niepowtarzalne wartosci (zeby nie losowac dwa razy czy moze byc np polaczenie 1-2 i 2-1)
     if type(n) is not int:
-        print("Podana liczba wierzcgołków nie jest liczbą całkowitą")
+        print("Podana liczba wierzchołków nie jest liczbą całkowitą")
         sys.exit()
     if p < 0 or p > 1:
         print("p musi być w przedziale <0, 1>")
@@ -26,20 +26,19 @@ def gen_G_p(n, p):
         row = []
         for j in range(i, n):
             if random.random() < p and i != j:
-                row.append(j + 1)
+                row.append(j)
         g_list.append(row)
-
     # uzupelnienie o poprzednio wylosowane wartosci
     for i in range(1, n):
         for j in range(0, i):
-            if i + 1 in g_list[j]:
-                g_list[i].append(j + 1)
+            if i in g_list[j]:
+                g_list[i].append(j)
 
     for i in range(n):
         g_list[i].sort()
 
     return g_list
-
+    
     ##### zapisywanie do pliku
     ##### musi istnieć plik random_graph.txt
     ##### musi istnieć plik do korego ma zapisywać
@@ -50,7 +49,7 @@ def gen_G_p(n, p):
 #generator G(n, l) zwraca macierz sąsiedztwa
 def gen_G_l(n, l):
     if type(n) is not int:
-        print("Podana liczba wierzchgołków nie jest liczbą całkowitą")
+        print("Podana liczba wierzchołków nie jest liczbą całkowitą")
         sys.exit()
     if type(l) is not int:
         print("Podana liczba krawędzi nie jest liczbą całkowitą")
