@@ -1,5 +1,5 @@
 import functions
-import weighted_graph as wg
+import weightedgraph as wg
 
 if __name__ == "__main__":
     A =  [
