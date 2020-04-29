@@ -21,7 +21,7 @@ def print_adj_matrix(adj_matrix):
 
 def weighted_graph_plot(adj_matrix):
     graph = nx.from_numpy_matrix(np.matrix(adj_matrix), create_using=nx.Graph)
-    layout = nx.circular_layout(graph)
+    layout = nx.planar_layout(graph)
     options = {
         'node_color': '#570000',
         'node_size': 300,
