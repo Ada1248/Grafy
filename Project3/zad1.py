@@ -2,7 +2,7 @@ import random
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
-import functions
+import functions_z1
 random.seed()
 
 n_matrix = []
@@ -41,15 +41,15 @@ def gererate_random_conneced_graph(n, edges):
     for i in range(n):
         n_list[i].sort()
 
-    open('output.txt','w').close()
-    with open("output.txt", 'r+') as file:
-        file.writelines(' '.join(str(j) for j in i) + '\n' for i in n_list)
+    # open('output.txt','w').close()
+    # with open("output.txt", 'r+') as file:
+    #     file.writelines(' '.join(str(j) for j in i) + '\n' for i in n_list)
 
 def create_weighted_connected_graph(n):
     for i in range(n):
         for j in range(len(n_list[i])):
             n_list[i][j]-=1
-    n_matrix = functions.adj_list_to_adj_matrix(n_list)
+    n_matrix = functions_z1.adj_list_to_adj_matrix(n_list)
     for i in range(n):
         row = []
         for j in range(n):
@@ -61,9 +61,9 @@ def create_weighted_connected_graph(n):
             if n_matrix[i][j] == 1:
                 weighted_n_matrix[i][j] = int(random.random()*9+1)
                 weighted_n_matrix[j][i] = weighted_n_matrix[i][j]
-    open('output2.txt','w').close()
-    with open("output2.txt", 'r+') as file:
-        file.writelines(' '.join(str(j) for j in i) + '\n' for i in weighted_n_matrix)
+    # open('output2.txt','w').close()
+    # with open("output2.txt", 'r+') as file:
+    #     file.writelines(' '.join(str(j) for j in i) + '\n' for i in weighted_n_matrix)
 
 
 def print_weighted_graph(n):
