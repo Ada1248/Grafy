@@ -1,13 +1,6 @@
-import networkx as nx
 import matplotlib.pyplot as plt
-
-adj_matrix = [
-    [0, 1, 0, 0, 1],
-    [1, 0, 1, 1, 0],
-    [0, 1, 0, 1, 1],
-    [0, 1, 1, 0, 0],
-    [1, 0, 1, 0, 0]
-]
+import networkx as nx
+import numpy as np
 
 
 # Zamiana listy sąsiedztwa na macierz sąsiedztwa
@@ -21,35 +14,6 @@ def adj_matrix_to_adj_list(matrix):
     return [[idx for idx, val in enumerate(el) if val] for el in matrix]
 
 
-adj_list = adj_matrix_to_adj_list(adj_matrix)
-
-with open('Adj.txt', 'r+') as file:
-    for i in range(len(adj_list)):
-        file.write(str(i) + ' ')
-        for j in range(len(adj_list[i])):
-            file.write(str(adj_list[i][j]) + ' ')
-        file.write('\n')
-    file.close()
-
-graph = nx.read_adjlist('Adj.txt', create_using=nx.Graph(), nodetype=int)
-
-print(nx.info(graph))
-
-options = {
-    'node_color': '#424242',
-    'node_size': 300,
-    'line_color': '#878787',
-    'font_color': '#f2f2f2',
-    'width': 0.25,
-    'with_labels': 1,
-}
-
-nx.draw_circular(graph, **options)
-
-
-# nx.draw(graph, **options)
-# plt.show()
-
 def is_valid(graph, v, pos, path):
     if graph[path[pos - 1]][v] == 0:
         return False
@@ -59,19 +23,16 @@ def is_valid(graph, v, pos, path):
     return True
 
 
-def ham_cycle_util(graph, path, pos):
+def ham_cycle_helper(graph, path, pos):
     if pos == len(graph):
         if graph[path[pos - 1]][path[0]] == 1:
             return True
         else:
             return False
     for v in range(1, len(graph)):
-
         if is_valid(graph, v, pos, path) == True:
-
             path[pos] = v
-
-            if ham_cycle_util(graph, path, pos + 1) == True:
+            if ham_cycle_helper(graph, path, pos + 1) == True:
                 return True
             path[pos] = -1
 
@@ -80,20 +41,43 @@ def ham_cycle(graph):
     path = [-1] * len(graph)
     path[0] = 0
 
-    if ham_cycle_util(graph, path, 1) == False:
+    if ham_cycle_helper(graph, path, 1) == False:
         print("Graf nie jest hamiltonowski\n")
         return False
 
-    print_solution(graph, path)
-    return True
-
-
-def print_solution(graph, path):
     print("Cykl Hamiltona: ")
     for vertex in path:
         print(vertex, end=" ")
     print(path[0], "\n")
+    return True
 
 
-ham_cycle(adj_matrix)
+def graph_plot(adj_matrix):
+    graph = nx.from_numpy_matrix(np.matrix(adj_matrix), create_using=nx.Graph)
+    layout = nx.circular_layout(graph)
+    options = {
+        'node_color': '#570000',
+        'node_size': 300,
+        'line_color': '#878787',
+        'font_color': '#f2f2f2',
+        'width': 0.25,
+        'with_labels': 1,
+    }
+    nx.draw(graph, layout, **options)
+    plt.show()
 
+
+if __name__ == "__main__":
+    adjacency_matrix = [
+        [0, 0, 0, 1, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 1, 0],
+        [1, 1, 1, 0, 0, 0, 1],
+        [1, 1, 1, 1, 0, 0, 0],
+        [1, 1, 1, 0, 1, 0, 0]
+    ]
+
+    adj_list = adj_matrix_to_adj_list(adjacency_matrix)
+    ham_cycle(adjacency_matrix)
+    graph_plot(adjacency_matrix)
