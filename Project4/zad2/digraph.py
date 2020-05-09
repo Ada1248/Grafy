@@ -47,7 +47,7 @@ class DiGraph:
         f[v] = t[0]
 
     def transpose(self):
-        tmp = DiGraph(7)
+        tmp = DiGraph(len(self.adj_matrix))
         for i in range(len(self.adj_matrix)):
             for j in range(len(self.adj_matrix[i])):
                 if(self.adj_matrix[i][j]==1):
@@ -98,7 +98,7 @@ class DiGraph:
         
         
 if __name__ == '__main__':
-    graph = DiGraph(7)
+    graph = DiGraph(5)
     # adj_l = [
     #     [1, 4],
     #     [2],
@@ -110,6 +110,4 @@ if __name__ == '__main__':
     graph.create_from_file('test.in')
     # graph.add_edge(0, 3)
     graph.print()
-    graph.Kosaraju()
-
     digraph_plot(graph.adj_matrix)
