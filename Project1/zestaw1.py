@@ -5,8 +5,8 @@ from matplotlib import pyplot as plt
 import random
 import sys
 
-import networkx as nx
-import networkx.drawing.tests.test_pylab
+# import networkx as nx
+# import networkx.drawing.tests.test_pylab
 
 random.seed()
 
@@ -60,12 +60,12 @@ def gen_G_l(n, l):
     adj_matrix = [[0 for _ in range(n)] for _ in range(n)]
     sum_1 = 0
     while sum_1 != l:
-        i = random.randrange(0, n)
-        j = random.randrange(i, n)
-        if adj_matrix[i][j] == 0 and i != j:
+        i = random.randrange(0, n-1)
+        j = random.randrange(i+1, n)
+        if adj_matrix[i][j] == 0:
             adj_matrix[i][j] = 1
-            adj_matrix[j][i] = 1  
-            sum_1 += 1  
+            adj_matrix[j][i] = 1
+            sum_1 += 1 
     return adj_matrix          
 
 #funkcja tworząca plik txt na podstawie którego rysowany jest wykres

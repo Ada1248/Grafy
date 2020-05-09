@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+
 #wypisywanie macierzy
 def print_matrix(matrix):
     msg = ''
@@ -14,6 +18,22 @@ def print_adj_matrix(adj_matrix):
     msg += print_matrix(adj_matrix)
     return msg
 
+
+def weighted_graph_plot(adj_matrix):
+    graph = nx.from_numpy_matrix(np.matrix(adj_matrix), create_using=nx.Graph)
+    layout = nx.planar_layout(graph)
+    options = {
+        'node_color': '#570000',
+        'node_size': 300,
+        'line_color': '#878787',
+        'font_color': '#f2f2f2',
+        'width': 0.25,
+        'with_labels': 1,
+    }
+    nx.draw(graph, layout, **options)
+    labels = nx.get_edge_attributes(graph, "weight")
+    nx.draw_networkx_edge_labels(graph, pos=layout, edge_labels=labels)
+    plt.show()
 
 class WeightedGraph:
     def __init__(self, representation):

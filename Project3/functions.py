@@ -54,9 +54,7 @@ def print_dijkstra(d, p, s):
 
 
 ### ZAD 3 - MACIERZ ODLEGŁOSCI ###
-
 def make_matrix_of_distance(g):
-    ##można jeszcze zoptymalizować
     matrix = [[] for i in range(len(g.adj_matrix))]
     for i in range(len(g.adj_matrix)):
         matrix[i] += dijkstra(g, i)[0]
@@ -64,8 +62,7 @@ def make_matrix_of_distance(g):
 
 
 
-### ZAD 4 - CENTRUM / CENTRUM  ###
-
+### ZAD 4 - CENTRUM / CENTRUM MINIMAX ###
 def find_centre(g):
     matrix = make_matrix_of_distance(g)
     sums = [sum(el) for el in matrix]
@@ -73,10 +70,9 @@ def find_centre(g):
     centre = sums.index(min(sums))
     return 'Centrum = {} (suma odleglosci: {})'.format(centre + 1, sums[centre])
 
-
 def find_centre_minimax(g):
     matrix = make_matrix_of_distance(g)
     maxes = [max(el) for el in matrix]
     # print(maxes)
     centre = maxes.index(min(maxes))
-    return '''Centrum minimax= {} (odleglosC od najdalszego: {})'''.format(centre + 1, maxes[centre])
+    return '''Centrum minimax= {} (odleglosc od najdalszego: {})'''.format(centre + 1, maxes[centre])
