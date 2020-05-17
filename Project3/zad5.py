@@ -22,9 +22,10 @@ class Graph:
                     if self.adj_matrix[i][j]:
                         self.edges.append([i, j, self.adj_matrix[i][j]])
 
-    def print_adj_matrix(self):
+    def __str__(self):
         for row in self.adj_matrix:
             print(row)
+        return "adjacency matrix"
 
 
 def dfs(adj_list, vertex, visited, parent):
@@ -101,11 +102,10 @@ if __name__ == "__main__":
 
     g = Graph(6)
     g.from_file('test.in')
-    g.print_adj_matrix()
     # wgplot(g.adj_matrix)
     wgplot(kruskal_mst(g))
 
-    # g.print_adj_matrix()
+    print(g)
     # wgplot(g.adj_matrix)
     # print(kruskal_mst(g))
     # wgplot(kruskal_mst(g))

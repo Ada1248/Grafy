@@ -36,6 +36,7 @@ class RandomDiGraph:
 
 
 if __name__ == "__main__":
-    graph = RandomDiGraph(10, 0.6)
+    graph = RandomDiGraph(8, 0.3)
     graph.print()
     digraph_plot(graph.adj_matrix)
+    # weighted_digraph_plot(graph.adj_matrix)
