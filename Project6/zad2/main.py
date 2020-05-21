@@ -4,7 +4,7 @@ import math
 import matplotlib.pyplot as plt
 import networkx as nx
 
-MAX_IT = 5000
+MAX_IT = 20000
 coordinates = []
 
 def read_poins_from_file():
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     # print(dist(path))
     # print_path('base_path.dat')
 
-    ## path after with IT_MAX = 50k
-    # path = read_latest_path('path_50k_iter.dat')
+    # ## path after with IT_MAX = 5k
+    # path = read_latest_path('path_5k_iter.dat')
     # print(dist(path))
-    # print_path('path_50k_iter.dat')
+    # print_path('path_5k_iter.dat')
