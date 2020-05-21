@@ -4,7 +4,7 @@ import math
 import matplotlib.pyplot as plt
 import networkx as nx
 
-MAX_IT = 20000
+MAX_IT = 100
 coordinates = []
 
 def read_poins_from_file():
@@ -84,22 +84,28 @@ def print_path(filename):
 
 if __name__ == '__main__':
     coordinates = read_poins_from_file()
-    # ##start with base path
-    # latest_path = read_latest_path('base_path.dat')
-    # symulated_annealing(latest_path)
-    # print_path('latest_path.dat')
 
-    ##start with last best path
-    latest_path = read_latest_path('latest_path.dat')
+    ##start with base path
+    latest_path = read_latest_path('base_path.dat')
     symulated_annealing(latest_path)
     print_path('latest_path.dat')
+
+    ##start with last best path
+    # latest_path = read_latest_path('latest_path.dat')
+    # symulated_annealing(latest_path)
+    # print_path('latest_path.dat')
 
     ## base path
     # path = read_latest_path('base_path.dat')
     # print(dist(path))
     # print_path('base_path.dat')
 
-    # ## path after with IT_MAX = 5k
-    # path = read_latest_path('path_5k_iter.dat')
+    # ## path after with IT_MAX = 1k
+    # path = read_latest_path('path_1k_iter.dat')
     # print(dist(path))
-    # print_path('path_5k_iter.dat')
+    # print_path('path_1k_iter.dat')
+
+    # ## path after with IT_MAX = 20k
+    # path = read_latest_path('patk_20k_iter.dat')
+    # print(dist(path))
+    # print_path('patk_20k_iter.dat')
