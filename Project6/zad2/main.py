@@ -4,7 +4,7 @@ import math
 import matplotlib.pyplot as plt
 import networkx as nx
 
-MAX_IT = 100
+MAX_IT = 5000
 coordinates = []
 
 def read_poins_from_file():
@@ -46,7 +46,7 @@ def symulated_annealing(latest_path):
             else:
                 r = random.random()
                 try:
-                    if r < math.exp(-1.0 * (dist(Pnew) - dist(P)/T)):
+                    if r < math.exp(-1.0 * (dist(Pnew) - dist(P))/T):
                         P = copy.deepcopy(Pnew)
                 except OverflowError:
                     if r < float('0'):
@@ -84,15 +84,15 @@ def print_path(filename):
 
 if __name__ == '__main__':
     coordinates = read_poins_from_file()
-    ##start with base path
-    latest_path = read_latest_path('base_path.dat')
-    symulated_annealing(latest_path)
-    print_path('latest_path.dat')
-
-    # ##start with last best path
-    # latest_path = read_latest_path('latest_path.dat')
+    # ##start with base path
+    # latest_path = read_latest_path('base_path.dat')
     # symulated_annealing(latest_path)
     # print_path('latest_path.dat')
+
+    ##start with last best path
+    latest_path = read_latest_path('latest_path.dat')
+    symulated_annealing(latest_path)
+    print_path('latest_path.dat')
 
     ## base path
     # path = read_latest_path('base_path.dat')
