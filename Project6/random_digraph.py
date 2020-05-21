@@ -34,9 +34,3 @@ class RandomDiGraph:
         for row in self.inc_matrix:
             print(row)
 
-
-if __name__ == "__main__":
-    graph = RandomDiGraph(8, 0.3)
-    graph.print()
-    digraph_plot(graph.adj_matrix)
-    # weighted_digraph_plot(graph.adj_matrix)

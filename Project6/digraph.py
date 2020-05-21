@@ -45,7 +45,7 @@ class DiGraph:
         print('\nIncidence Matrix:')
         for row in self.inc_matrix:
             print(row)
-
+        print()
 
 def adj_matrix_to_incidence_matrix(adj_matrix):
     inc_matrix = [[] for el in range(len(adj_matrix))]
@@ -61,22 +61,3 @@ def adj_matrix_to_incidence_matrix(adj_matrix):
                         el.append(0)
     return inc_matrix
 
-
-if __name__ == '__main__':
-    graph = DiGraph(5)
-    adj_l = [
-        [1, 4],
-        [2],
-        [3, 0],
-        [1, 0],
-        [2, 3]
-    ]
-    graph.create_with_adj_list(adj_l)
-    # graph.create_from_file('test.in')
-    # graph.add_edge(0, 3)
-    # graph.add_edge(4, 1)
-    # graph.add_edge(4, 0)
-    # graph.add_edge(2, 1)
-
-    graph.print()
-    digraph_plot(graph.adj_matrix)
